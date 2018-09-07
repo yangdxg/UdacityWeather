@@ -24,3 +24,45 @@
   left: 0;
   z-index: -1
 }
+.timetips{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25rpx;
+  margin-bottom: 25rpx
+}
+.timetips-icon{
+  width: 36rpx;
+  height: 28rpx;
+  margin-right: 10rpx
+}
+.timetips-text{
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.5
+}
+.forecast-list{
+  display: flex
+}
+.forecast-item{
+  width: 120rpx;
+  /* 当宽度超出屏幕时不进行压缩 */
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.forecast-time{
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+.forecast-weather{
+  margin-top: 50rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+.forecast-temp{
+  margin-top: 46rpx;
+  font-size: 40rpx;
+  line-height: 56rpx;
+}

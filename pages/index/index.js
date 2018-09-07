@@ -28,7 +28,8 @@ Page({
   data: {
     nowTemp: '14°',
     nowWeather: '阴天',
-    nowWeatherBackground: ''
+    nowWeatherBackground: '',
+    hourlyWeather:"[]"
   },
 
   /**
@@ -52,19 +53,8 @@ Page({
       },
       success: res => {
         let result = res.data.result
-        // 气温
-        let temp = result.now.temp
-        // 天气
-        let weather = result.now.weather
-        this.setData({
-          nowTemp: temp + "°",
-          nowWeather: weatherMap[weather],
-          nowWeatherBackground: '/images/' + weather + '-bg.png'
-        })
-        wx.setNavigationBarColor({
-          frontColor: '#000000',
-          backgroundColor: weatherColorMap[weather],
-        })
+        this.setNow(result)
+        this.setHourlyWeather(result)
       },
       //完成后停止刷新
       complete: () => {
@@ -73,6 +63,43 @@ Page({
       }
     })
   },
+  // 设置当前时间
+  setNow(result){
+    // 气温
+    let temp = result.now.temp
+    // 天气
+    let weather = result.now.weather
+    this.setData({
+      nowTemp: temp + "°",
+      nowWeather: weatherMap[weather],
+      nowWeatherBackground: '/images/' + weather + '-bg.png'
+    })
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: weatherColorMap[weather],
+    })
+  },
+  // 设置未来时间
+  setHourlyWeather(result){
+    // 气温天气列表
+    let forecast = result.forecast
+    // 获取当前时刻
+    let nowHour = new Date().getHours()
+    let hourlyWeather = []
+    // 从当前时间起,每三小时
+    for (let i = 0; i < 8; i++) {
+      hourlyWeather.push({
+        time: (nowHour + i * 3) % 24 + "时",
+        iconPath: "/images/" + forecast[i].weather + "-icon.png",
+        temp: forecast[i].temp + '°'
+      })
+    }
+    hourlyWeather[0].time = "现在"
+    this.setData({
+      hourlyWeather: hourlyWeather
+    })
+  },
+
   /**
    * 生命周期函数--监听页面显示
    */
