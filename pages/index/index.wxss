@@ -66,3 +66,27 @@
   font-size: 40rpx;
   line-height: 56rpx;
 }
+.day-weather{
+  height: 90rpx;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  flex-direction: row;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+  right: 40rpx;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  left: 40rpx;
+  opacity: 0.5;
+  align-items: center
+}
+.temp-text{
+  /* 权重1 */
+  flex-grow: 1;
+  text-align: right;
+  padding-right: 30rpx
+}
+.arrow-icon{
+  width: 13rpx;
+  height: 24rpx
+}
