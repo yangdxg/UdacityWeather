@@ -13,7 +13,7 @@
 .weather-wrapper{
   position: relative;
   width: 750rpx;
-  padding-top: 174rpx;
+  padding-top: 20rpx;
   padding-bottom: 250rpx
 }
 .weather-bg{
@@ -89,4 +89,30 @@
 .arrow-icon{
   width: 13rpx;
   height: 24rpx
+}
+/*位置*/
+.location-wrapper{
+  font-size: 30rpx;
+  line-height: 42rpx;
+  margin-bottom: 60rpx;
+    color: rgba(0, 0, 0, 0.5)!important;
+  border: none!important;
+  padding: 0!important;
+}
+.location-icon{
+  width: 21rpx;
+  height: 30rpx;
+  margin-right: 10rpx
+}
+.location{
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+.location-tips{
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+  justify-content: center;
+  height: 42rpx
 }
