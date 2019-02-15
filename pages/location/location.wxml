@@ -1,0 +1,15 @@
+<view class='top-search'>
+  <input placeholder='请输入地点名称' bindinput='searchInput'>请输入地点名称</input>
+  <image src='/images/clear_input_icon.png'></image>
+</view>
+<view>
+  <view class='xtitle'>
+    <text>我的城市</text>
+    <text>编辑</text>
+  </view>
+  <view class='hot-grid'>
+    <block wx:for="{{hotCity}}" wx:for-item="city" wx:key="{{city}}">
+      <text>{{city.location}}</text>
+    </block>
+  </view>
+</view>

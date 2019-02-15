@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/list/list"
+    "pages/list/list",
+    "pages/location/location"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -10,5 +11,10 @@
     "navigationBarTitleText": "忧心天气",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   }
 }

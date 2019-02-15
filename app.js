@@ -34,6 +34,7 @@ App({
     })
   },
   globalData: {
+    key:'2a4cc99ce34148709a2336eea61d824e',
     userInfo: null
   }
 })

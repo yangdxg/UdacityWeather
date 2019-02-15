@@ -55,7 +55,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('onLoad1')
     this.qqmapsdk = new QQMapWX({
       key: '4LBBZ-RVAC2-QHDUM-CA6VW-GBZET-N6F7F'
     });
@@ -70,13 +69,27 @@ Page({
         this.setData({
           locationAuthType: locationAuthType,
         })
-        if (auth)
+        if (auth){
+          console.log('获取权限')
           this.getCityAndWeather()
-        else
+        }else{
+          console.log('没有获取权限')
           this.getNow() //使用默认城市广州
+        }
       },
       fail: () => {
         this.getNow() //使用默认城市广州
+      }
+    })
+    wx.getLocation({
+      success: function(res) {
+        //获取位置信息成功
+      },
+      fail:function(res){
+        //获取位置信息失败
+        wx.navigateTo({
+          url: '/pages/location/location',
+        })
       }
     })
   },
@@ -85,7 +98,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    console.log('onReady1')
   },
 
   getNow(callback) {
