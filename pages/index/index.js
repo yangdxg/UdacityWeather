@@ -28,7 +28,7 @@ const QQMapWX = require('../../libs/qqmap-wx-jssdk.js')
 const UNPROMPTED = 0
 const UNAUTHORIZED = 1
 const AUTHORIZED = 2
-/**
+/** 
  * 各种权限状态下对应的显示文字
  */
 const UNPROMPTED_TIPS = "点击获取当前位置"
