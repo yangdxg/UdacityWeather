@@ -1,15 +1,38 @@
 <view class='top-search'>
-  <input placeholder='请输入地点名称' bindinput='searchInput'>请输入地点名称</input>
-  <image src='/images/clear_input_icon.png'></image>
+  <input placeholder='请输入地点名称'  bindinput='searchInput' value='{{inputSearch}}'>请输入地点名称</input>
+  <image bindtap='clearInputClick' src='/images/clear_input_icon.png'></image>
 </view>
-<view>
+<view hidden='{{searchCity.length!=0}}'>
   <view class='xtitle'>
     <text>我的城市</text>
-    <text>编辑</text>
+    <text bindtap='editClick'>{{editMyCity?"完成":"编辑"}}</text>
+  </view>
+  <view class='hot-grid'>
+    <button bindtap='locationClick' class='item location' open-type="{{ location.location=='当前位置' ? 'openSetting' : ''}}">
+      <image class='icon-location' src='/images/icon-location.png'></image>
+      <text>{{location.location}}</text>
+    </button>
+    <block wx:for="{{myCity}}" wx:for-item="city" wx:key="{{city}}">
+      <view class='hot'>
+        <view bindtap='myCityClick' data-city='{{city}}' class='item'>
+          <text>{{city.location}}</text>
+        </view>
+        <image hidden='{{!editMyCity}}' bindtap='deleteClick' data-index='{{index}}' src='/images/icon-delete.png' style='margin-left:30rpx'></image>
+      </view>
+    </block>
+  </view>
+  <view class='xtitle'>
+    <text>热门城市</text>
   </view>
   <view class='hot-grid'>
     <block wx:for="{{hotCity}}" wx:for-item="city" wx:key="{{city}}">
-      <text>{{city.location}}</text>
+      <view bindtap='cityItemClick' data-city='{{city}}' class='item'>
+        <text>{{city.location}}</text>
+      </view>
     </block>
   </view>
 </view>
+<block wx:for="{{searchCity}}" wx:for-item="city" wx:key="{{city}}">
+  <view bindtap='cityItemClick' data-city='{{city}}' class='city-list-item'>{{city.location}} {{city.admin_area}} {{city.cnty}}</view>
+  <view class='bottom-line'></view>
+</block>

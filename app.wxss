@@ -1,0 +1,7 @@
+.bottom-line{
+  width: 100%-60rpx;
+  height: 2rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  background-color: #eee
+}

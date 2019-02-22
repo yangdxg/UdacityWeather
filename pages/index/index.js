@@ -84,6 +84,9 @@ Page({
     wx.getLocation({
       success: function(res) {
         //获取位置信息成功
+        wx.navigateTo({
+          url: '/pages/location/location',
+        })
       },
       fail:function(res){
         //获取位置信息失败
