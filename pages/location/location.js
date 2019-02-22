@@ -1,4 +1,3 @@
-// pages/location/location.js
 var urlCommond = require('../../utils/urlCommond.js')
 
 Page({

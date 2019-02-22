@@ -1,13 +1,20 @@
 
+
+var key = ''
 /**
  * 热门城市
  */
-var hotCity = 'https://search.heweather.net/top?group=cn&key=2a4cc99ce34148709a2336eea61d824e'
+var hotCity = 'https://search.heweather.net/top?group=cn&key='+key
 /**
  * 城市搜索
  */
-var searchCity = 'https://search.heweather.net/find?group=cn&key=2a4cc99ce34148709a2336eea61d824e'
+var searchCity = 'https://search.heweather.net/find?group=cn&key=' + key
+/**
+ * 获取生活指数
+ */
+var lifestyle = 'https://api.heweather.net/s6/weather/lifestyle?group=cn&key=' + key
 module.exports = {
   hotCity: hotCity,
-  searchCity: searchCity
+  searchCity: searchCity,
+  lifestyle: lifestyle
 }

@@ -1,3 +1,5 @@
+var urlCommond = require('../../utils/urlCommond.js')
+
 /**
  * 天气英文到中文的映射
  */
@@ -72,6 +74,7 @@ Page({
         if (auth){
           console.log('获取权限')
           this.getCityAndWeather()
+          this.getLifeStyle()
         }else{
           console.log('没有获取权限')
           this.getNow() //使用默认城市广州
@@ -84,9 +87,7 @@ Page({
     wx.getLocation({
       success: function(res) {
         //获取位置信息成功
-        wx.navigateTo({
-          url: '/pages/location/location',
-        })
+
       },
       fail:function(res){
         //获取位置信息失败
@@ -215,25 +216,22 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    console.log('onShow1')
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-    console.log('onHide1')
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-    console.log('onUnload1')
+/**
+ * 获取生活指数
+ */
+  getLifeStyle(){
+    console.log('124')
+    let that = this
+    wx.request({
+      url: urlCommond.searchCity + '&location=' + this.data.city,
+      success(res) {
+        console.log('123'+res)
+        console.log(res)
+      },
+      fail(res){
+        console.log(res)
+      }
+    })
   },
 
   /**
