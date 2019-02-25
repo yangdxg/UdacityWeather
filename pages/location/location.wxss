@@ -1,5 +1,7 @@
 /* pages/location/location.wxss */
-
+page{
+  background-color: white
+}
 .top-search {
   margin: 30rpx 30rpx;
   position: relative;

@@ -13,8 +13,8 @@
       <text>{{location.location}}</text>
     </button>
     <block wx:for="{{myCity}}" wx:for-item="city" wx:key="{{city}}">
-      <view class='hot'>
-        <view bindtap='myCityClick' data-city='{{city}}' class='item'>
+      <view bindtap='cityItemClick' class='hot' data-city='{{city}}'>
+        <view bindtap='myCityClick'  class='item'>
           <text>{{city.location}}</text>
         </view>
         <image hidden='{{!editMyCity}}' bindtap='deleteClick' data-index='{{index}}' src='/images/icon-delete.png' style='margin-left:30rpx'></image>

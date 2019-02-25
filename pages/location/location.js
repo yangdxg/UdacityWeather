@@ -82,8 +82,9 @@ Page({
       let pages = getCurrentPages()
       let prePage = pages[pages.length - 2]
       prePage.setData({
-        city: this.data.location
+        location: this.data.location
       })
+      prePage.getData()
       wx.navigateBack({
         delta: 1,
       })
@@ -93,20 +94,29 @@ Page({
    * 点击搜索的城市或点击热门城市
    */
   cityItemClick(e) {
-    let selectCity = e.currentTarget.dataset.city
-    this.data.myCity.push(selectCity)
-    this.setData({
-      myCity: this.data.myCity
-    })
-    this.saveMyCity()
-    let pages = getCurrentPages()
-    let prePage = pages[pages.length - 2]
-    prePage.setData({
-      city: selectCity
-    })
-    wx.navigateBack({
-      delta: 1,
-    })
+    if (!this.data.editMyCity) {
+      let selectCity = e.currentTarget.dataset.city
+      let data = JSON.stringify(this.data.myCity)
+      if (data.indexOf(selectCity.location) == -1) {
+        this.data.myCity.splice(0, 0, selectCity)
+      }
+      if (this.data.myCity.length > 5) {
+        this.data.myCity.pop()
+      }
+      this.setData({
+        myCity: this.data.myCity
+      })
+      this.saveMyCity()
+      let pages = getCurrentPages()
+      let prePage = pages[pages.length - 2]
+      prePage.setData({
+        location: selectCity
+      })
+      prePage.getData()
+      wx.navigateBack({
+        delta: 1,
+      })
+    }
   },
   /**
    * 获取热门城市列表
@@ -130,12 +140,10 @@ Page({
     wx.request({
       url: urlCommond.searchCity + '&location=' + key,
       success(res) {
-        console.log(res)
         let searchCity = res.data.HeWeather6[0].basic
         if (res.data.HeWeather6[0].basic == undefined) {
           searchCity = []
         }
-        console.log(searchCity)
         that.setData({
           searchCity: searchCity
         })
@@ -150,7 +158,6 @@ Page({
     wx.request({
       url: urlCommond.searchCity + '&location=' + long + ',' + lat,
       success(res) {
-        console.log(res)
         that.setData({
           location: res.data.HeWeather6[0].basic[0]
         })
@@ -181,7 +188,8 @@ Page({
    */
   clearInputClick(e) {
     this.setData({
-      inputSearch: ''
+      inputSearch: '',
+      searchCity:[]
     })
   }
 })

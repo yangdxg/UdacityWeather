@@ -1,33 +1,72 @@
+<view class='loadding-view' style='height:{{location.location==undefined?"100%":"0rpx"}}'></view>
 <view class='weather-wrapper'>
-  <button class='location-wrapper' open-type="{{ locationAuthType==1 ? 'openSetting' : ''}}" bindopensetting="onTapLocation" bindtap="onTapLocation" plain="true">
-    <view class='location'>
-      <image class='location-icon' src='/images/location-icon.png'></image>
-      <view>{{city}}</view>
-    </view>
-    <!-- 0: 未弹窗， 1: 已拒绝， 2: 已同意 -->
-    <view wx:if="{{locationAuthType==0}}" class="location-tips">点击获取当前位置</view>
-    <view wx:if="{{locationAuthType==1}}" class="location-tips">点击开启位置权限</view>
-    <view wx:if="{{locationAuthType==2}}" class="location-tips"></view>
-  </button>
-  <view class="temp">{{nowTemp}}</view>
-  <view class='weather'>{{nowWeather}}</view>
-  <image class='weather-bg' src='{{nowWeatherBackground}}' mode='scaleToFill'></image>
-  <view class='day-weather' bindtap='onTapDayWeather'>
-    <view class='day-text'>{{todayDate}}</view>
-    <view class='temp-text'>{{todayTemp}}</view>
-    <image class='arrow-icon' src='/images/arrow.png'></image>
+  <view class='location' bindtap="onTapLocation">
+    <image class='location-icon' src='/images/location-icon.png'></image>
+    <view>{{location.admin_area}} {{location.location}}</view>
   </view>
+  <view class="temp">{{now.tmp}}</view>
+  <view class="temp-c">℃</view>
+  <view class='weather'>
+    <view style='line-height: 56rpx;'>{{now.cond_txt}}</view>
+    <view style='font-size:28rpx;line-height: 42rpx;'>{{daily_forecast[0].tmp_max}}℃/{{daily_forecast[0].tmp_min}}℃</view>
+    <view style='font-size:26rpx;color:#666;'>空气{{air_now_city.qlty}}</view>
+  </view>
+  <view class='publish-time'>发布时间{{air_now_city.pub_time}}</view>
+  <image class='weather-bg' src='{{now.image_bg}}' mode='scaleToFill'></image>
 </view>
 <view class='timetips'>
   <image class='timetips-icon' src='/images/time-icon.png'></image>
   <text class='timetips-text'>未来24小时天气预测</text>
 </view>
+<!-- 24小时内天气 -->
+<view class='bottom-line2'></view>
 <scroll-view scroll-x>
   <view class='forecast-list'>
-    <view class='forecast-item' wx:key="" wx:for="{{hourlyWeather}}">
-      <view class='forecast-time'>{{item.time}}</view>
-      <image class='forecast-weather' src='{{item.iconPath}}'></image>
-      <view class='forecast-temp'>{{item.temp}}</view>
+    <view class='forecast-item' wx:key="{{hour}}" wx:for="{{hourly}}" wx:for-item="hour">
+      <view class='forecast-time'>{{hour.time}}</view>
+      <image class='forecast-weather' src='{{hour.iconPath}}'></image>
+      <view class='forecast-temp'>{{hour.tmp}}℃</view>
     </view>
   </view>
 </scroll-view>
+<view class='bottom-line2'></view>
+<!-- 七天的天气预报 -->
+<view class='bottom-line2' style='margin-top:30rpx'></view>
+<scroll-view scroll-x>
+  <view class='daily-forecast-container'>
+    <view class='item-daily-fotecast' wx:for="{{daily_forecast}}" wx:for-item="daily" wx:fot-key="{{daily}}">
+      <view class='forecast-time'>{{daily.date}}</view>
+      <view class='forecast-time'>{{daily.tmp_min}}~{{daily.tmp_max}}℃</view>
+      <view class='forecast-time'>{{daily.cond_txt_d}}
+        <image class='daily-image' src='{{daily.cond_code_d}}'></image>
+      </view>
+      <view class='forecast-time'>{{daily.wind_dir}}{{daily.wind_sc}}级</view>
+    </view>
+  </view>
+</scroll-view>
+<view class='bottom-line2'></view>
+<!-- 生活指数 -->
+<swiper class='life-swiper' bindchange='lifepagechange'>
+  <swiper-item>
+    <view class='life-container'>
+      <view bindtap='lifeItemClick' data-life='{{life}}' class='life-item' wx:for='{{lifestyle}}' wx:for-item='life' wx:for-key='life' wx:if='{{index<8}}'>
+        <image src='{{life.image}}'></image>
+        <view class='life-brf'>{{life.brf}}</view>
+        <view class='life-type' style='font-size:{{life.type.length>4?"18rpx":"22rpx"}}'>{{life.type}}</view>
+      </view>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='life-container'>
+      <view bindtap='lifeItemClick' data-life='{{life}}' class='life-item' wx:for='{{lifestyle}}' wx:for-item='life' wx:for-key='life' wx:if='{{index>7}}'>
+        <image src='{{life.image}}'></image>
+        <view class='life-brf'>{{life.brf}}</view>
+        <view class='life-type' style='font-size:{{life.type.length>4?"18rpx":"22rpx"}}'>{{life.type}}</view>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>
+<view class='bottom-nav'>
+  <view class='item-bottom-nav' style='background-color:{{lifeswiperpage==0?"#999":"#ddd"}}'></view>
+  <view class='item-bottom-nav' style='background-color:{{lifeswiperpage==1?"#999":"#ddd"}}'></view>
+</view>
