@@ -19,8 +19,7 @@
   <text class='timetips-text'>未来24小时天气预测</text>
 </view>
 <!-- 24小时内天气 -->
-<view class='bottom-line2'></view>
-<scroll-view scroll-x>
+<scroll-view scroll-x class='border'>
   <view class='forecast-list'>
     <view class='forecast-item' wx:key="{{hour}}" wx:for="{{hourly}}" wx:for-item="hour">
       <view class='forecast-time'>{{hour.time}}</view>
@@ -29,10 +28,8 @@
     </view>
   </view>
 </scroll-view>
-<view class='bottom-line2'></view>
 <!-- 七天的天气预报 -->
-<view class='bottom-line2' style='margin-top:30rpx'></view>
-<scroll-view scroll-x>
+<scroll-view scroll-x class='border' style='margin-top:30rpx'>
   <view class='daily-forecast-container'>
     <view class='item-daily-fotecast' wx:for="{{daily_forecast}}" wx:for-item="daily" wx:fot-key="{{daily}}">
       <view class='forecast-time'>{{daily.date}}</view>
@@ -44,7 +41,6 @@
     </view>
   </view>
 </scroll-view>
-<view class='bottom-line2'></view>
 <!-- 生活指数 -->
 <swiper class='life-swiper' bindchange='lifepagechange'>
   <swiper-item>
@@ -69,4 +65,14 @@
 <view class='bottom-nav'>
   <view class='item-bottom-nav' style='background-color:{{lifeswiperpage==0?"#999":"#ddd"}}'></view>
   <view class='item-bottom-nav' style='background-color:{{lifeswiperpage==1?"#999":"#ddd"}}'></view>
+</view>
+<view class='bottom-link'>
+  <button class='bottom-link-item' open-type="contact">
+    <image src='/images/icon-feedback.png'></image>
+    <view>意见反馈</view>
+  </button>
+  <button class='bottom-link-item' style='margin-left:60rpx' open-type="contact">
+    <image src='/images/icon-contact.png'></image>
+    <view>联系我们</view>
+  </button>
 </view>
